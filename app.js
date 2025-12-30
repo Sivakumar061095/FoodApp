@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const productsRouter = require("./productsRouter");
 const connectDB = require("./db");
-const { startInsertBidirectionalSync, stopSync } = require("./sync/insert");
+const { startBidirectionalSync, stopSync } = require("./sync/insert");
 
 dotenv.config();
 const app = express();
@@ -18,7 +18,7 @@ app.use("/api/v1/_health", (req, res) => {
 const port = process.env.PORT || 8000;
 app.listen(port, async function () {
   console.log(`Started running in the port ${port}`);
-  await startInsertBidirectionalSync();
+  await startBidirectionalSync();
 });
 
 process.on("SIGINT", async () => {

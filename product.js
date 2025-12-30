@@ -1,6 +1,5 @@
 const product = [
   {
-    id: "01",
     product_name: "Paneer Butter Masala",
     sku: "paneer-butter-masala",
     description: "Soft paneer cubes cooked in rich tomato butter gravy",
@@ -13,8 +12,6 @@ const product = [
     preparation_time: 20,
     rating: 4.5,
     image_url: "https://example.com/images/paneer_butter_masala.jpg",
-    created_at: "2024-10-12T10:30:00Z",
-    updated_at: "2024-12-01T15:45:00Z",
   },
 
   {
