@@ -41,9 +41,7 @@ async function startBidirectionalSync() {
           break;
 
         case "update":
-        case "replace":
-          if (!change.fullDocument || change.fullDocument.syncedFrom === "B")
-            return;
+          if (change.fullDocument?.syncedFrom === "B") return;
           await collB.updateOne(
             { _id: id },
             {

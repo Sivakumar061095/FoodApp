@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-connectDB(process.env.MONGO_URI);
+connectDB(process.env.MONGO_URI_2);
 app.use(requestMiddleware);
 app.use("/api/v1/products", productsRouter);
 
@@ -23,7 +23,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Endpoint not found" });
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT_2 || 8001;
 app.listen(port, async function () {
   console.log(`Started running in the port ${port}`);
   await startBidirectionalSync();

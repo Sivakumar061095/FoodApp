@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "foodApp": "nodemon foodApp.js"
   },
   "author": "sivamathi",
   "license": "ISC",
