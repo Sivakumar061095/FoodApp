@@ -26,11 +26,17 @@ async function startBidirectionalSync() {
       switch (change.operationType) {
         case "insert":
           if (change.fullDocument?.syncedFrom === "B") return;
-          await collB.insertOne({
-            ...change.fullDocument,
-            syncedFrom: "A",
-            syncedAt: new Date(),
-          });
+          await collB.updateOne(
+            { _id: id },
+            {
+              $set: {
+                ...change.fullDocument,
+                syncedFrom: "A",
+                syncedAt: new Date(),
+              },
+            },
+            { upsert: true }
+          );
           console.log("A → B INSERT:", id);
           break;
 
@@ -75,13 +81,19 @@ async function startBidirectionalSync() {
 
       switch (change.operationType) {
         case "insert":
-          if (change.fullDocument?.syncedFrom === "A") return;
-          await collA.insertOne({
-            ...change.fullDocument,
-            syncedFrom: "B",
-            syncedAt: new Date(),
-          });
-          console.log("B → A INSERT:", id);
+          if (change.fullDocument?.syncedFrom === "B") return;
+          await collB.updateOne(
+            { _id: id },
+            {
+              $set: {
+                ...change.fullDocument,
+                syncedFrom: "A",
+                syncedAt: new Date(),
+              },
+            },
+            { upsert: true }
+          );
+          console.log("A → B INSERT:", id);
           break;
 
         case "update":
