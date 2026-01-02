@@ -8,7 +8,17 @@ const logger = createLogger({
       return `${timestamp} [${level.toUpperCase()}]: ${message}`;
     })
   ),
-  transports: [new transports.Console()],
+  transports: [
+    new transports.Console(),
+    new transports.File({
+      filename: "logs/info.log",
+      level: "info",
+    }),
+    new transports.File({
+      filename: "logs/error.log",
+      level: "error",
+    }),
+  ],
 });
 
 module.exports = logger;
